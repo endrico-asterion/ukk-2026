@@ -1,29 +1,27 @@
-@extends ('layouts.app')
+@extends('layouts.app')
 
-@section ('content')
-<div class="container">
-    <h1>Kategori</h1>
-    <table class="table table-bordered table-strinped">
-        <thead>
+@section('content')
+
+<h1>kategori</h1>
+<a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Kategori</a>
+<table class="table table-bordered mt-3">
+        <tr>
+            <th>No</th>
+            <th>Nama Kategori</th>
+            <th>Aksi</th>
+        </tr>
+            @php $no = 1; @endphp
+            @foreach ($data as $d)
             <tr>
-                <th>No</th>
-                <th>Keterangan</th>
-                <th>Aksi</th>
+                <td>{{ $no++ }}</td>
+                <td>{{ $d->keterangan }}</td>
+                <td>
+                    <a href="" class="btn btn-warning">Edit</a>
+                    <a href="" class="btn btn-danger">Hapus</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach ($data as $kategori)
-            <tr>
-                    <td>{{ $kategori->id_kategori }}</td>
-                    <td>{{ $kategori->keterangan }}</td>
-                    <td>
-                        <a href="" class=" btn btn-success btn-sm">Edit</a>
-                        <a href="" class=" btn btn-danger btn-sm">Hapus</a>
-                    </td>
-                </tr>
-                @endforeach
-        </tbody>
-    </table>
-    {!! $data->links() !!}
-</div>
-@endsection
+
+            @endforeach
+        </table>
+
+        @endsection 
