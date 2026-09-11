@@ -28,4 +28,6 @@
     @endforeach
 </table>
 
+{!! $data->Links() !!}
+
 @endsection
