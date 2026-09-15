@@ -14,7 +14,7 @@
     @foreach ($data as $d)
     <tr>
         <td>{{ $no++ }}</td>
-        <td>{{ $d->keterangan }}</td>
+        <td>{{ $d->nama_kategori }}</td>
         <td>
            <a href="{{ route('kategori.edit', ['kategori' => $d->id_kategori]) }}" class="btn btn-warning">Edit</a>
 
