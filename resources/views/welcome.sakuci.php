@@ -19,7 +19,7 @@
         </p>
 
         <div class="d-flex flex-wrap gap-2 justify-content-center">
-            <a class="btn btn-brand btn-lg px-4" href="#langkah">Mulai dari sini</a>
+            <a class="btn btn-brand btn-lg px-4" href="/admin/kategori">liat web sarpras 86!</a>
             <a class="btn btn-outline-brand btn-lg px-4" href="https://github.com/indrabsus/sakuci-framework" target="_blank">GitHub</a>
         </div>
 

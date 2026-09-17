@@ -5,6 +5,7 @@
 CREATE TABLE IF NOT EXISTS `roles` (
     id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name       VARCHAR(50) NOT NULL UNIQUE,
+    can_register TINYINT(1) DEFAULT 0,
     created_at DATETIME NULL,
     updated_at DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

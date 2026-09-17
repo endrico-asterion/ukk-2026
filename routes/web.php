@@ -7,6 +7,7 @@ use App\Controllers\Core\DocsController;
 use App\Controllers\Core\RoleController;
 use App\Controllers\Core\UserController;
 use App\Controllers\KategoriController;
+use App\Controllers\AspirasiController;
 use Sakuci\Route;
 
 /*
@@ -62,6 +63,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
     Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+
+    Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
+    Route::get('/aspirasi/tambah', [AspirasiController::class, 'create'])->name('aspirasi.create');
+    Route::post('/aspirasi/simpan', [AspirasiController::class, 'store'])->name('aspirasi.store');
+
     });
 
 /*
