@@ -81,6 +81,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 */
 // @generated-roles:start
 
+// @role:siswa:start
+Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('siswa.dashboard');
+});
+// @role:siswa:end
 // @generated-roles:end
 
 /*
