@@ -13,7 +13,7 @@
 
     {{-- Hero --}}
     <section class="text-center py-4 py-lg-5">
-        <span class="badge rounded-pill badge-brand px-3 py-2 mb-3">Sakuci v1.0.0</span>
+        <span class="badge rounded-pill badge-brand px-3 py-2 mb-3">pengaduan v8.6</span>
 
         <h1 class="display-5 fw-bold mb-3">
             pengaduan<br class="d-none d-md-inline">
@@ -35,16 +35,16 @@
     </section>
 
    
-<!-- ================= DASHBOARD KONTEN SISWA ================= -->
+
 <div class="container my-5">
     
-    <!-- 1. KARTU STATISTIK RINGKASAN -->
+   
     <div class="row g-4 mb-5">
         <div class="col-md-3">
             <div class="card bg-dark text-white border-secondary h-100 shadow-sm">
                 <div class="card-body text-center">
                     <h6 class="text-uppercase text-muted">Total Pengaduan</h6>
-                    <h2 class="display-5 fw-bold text-primary">{{ $totalAspirasi ?? 0 }}</h2>
+                    <h2 class="display-5 fw-bold text">{{ $totalAspirasi ?? 0 }}</h2>
                     <small class="text-muted">Aspirasi terkirim</small>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="card bg-dark text-white border-secondary h-100 shadow-sm">
                 <div class="card-body text-center">
                     <h6 class="text-uppercase text-muted">Menunggu</h6>
-                    <h2 class="display-5 fw-bold text-warning">{{ $totalMenunggu ?? 0 }}</h2>
+                    <h2 class="display-5 fw-bold text">{{ $totalMenunggu ?? 0 }}</h2>
                     <small class="text-muted">Dalam antrean</small>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="card bg-dark text-white border-secondary h-100 shadow-sm">
                 <div class="card-body text-center">
                     <h6 class="text-uppercase text-muted">Proses</h6>
-                    <h2 class="display-5 fw-bold text-info">{{ $totalProses ?? 0 }}</h2>
+                    <h2 class="display-5 fw-bold text">{{ $totalProses ?? 0 }}</h2>
                     <small class="text-muted">Sedang ditangani</small>
                 </div>
             </div>
@@ -71,16 +71,16 @@
             <div class="card bg-dark text-white border-secondary h-100 shadow-sm">
                 <div class="card-body text-center">
                     <h6 class="text-uppercase text-muted">Selesai</h6>
-                    <h2 class="display-5 fw-bold text-success">{{ $totalSelesai ?? 0 }}</h2>
+                    <h2 class="display-5 fw-bold text">{{ $totalSelesai ?? 0 }}</h2>
                     <small class="text-muted">Telah ditanggapi</small>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. BANNER AKSI & INFORMASI ALUR -->
+   
     <div class="row g-4 align-items-center mb-5">
-        <!-- Banner Ajakan Buat Pengaduan -->
+      
         <div class="col-lg-7">
             <div class="p-4 p-md-5 rounded-3 bg-gradient bg-primary text-white shadow">
                 <h3 class="fw-bold">Ada Sarana Sekolah yang Rusak?</h3>
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <!-- Alur Pengaduan -->
+      
         <div class="col-lg-5">
             <div class="card bg-dark text-white border-secondary p-3">
                 <h5 class="fw-bold mb-3 text-warning"> Cara Mengirim Pengaduan</h5>
@@ -104,6 +104,7 @@
     </div>
 
 </div>
+
 
     
        

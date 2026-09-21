@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('content')
+
+
 <div class="container">
     <h2>Form Pengaduan Sarana Sekolah</h2>
 
@@ -30,3 +35,5 @@
         <button type="submit" class="btn btn-primary">Kirim Aspirasi</button>
     </form>
 </div>
+
+@endsection

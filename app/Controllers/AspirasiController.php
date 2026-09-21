@@ -38,30 +38,21 @@ class AspirasiController extends Controller
 
         // Ambil ID Siswa dari akun yang sedang login / session
         // (Ubah angka 1 ini dengan auth/session login siswa kamu)
-        $id_siswa = auth()->user()->siswa->id_siswa ?? 1;
+        $id_siswa = $_SESSION['id_siswa'] ?? $_SESSION['user']['id_siswa'] ?? 1;
 
-        // 2. Gunakan DB::transaction agar kedua tabel tersimpan secara serentak
-        DB::transaction(function () use ($request, $id_siswa) {
+         $aspirasi = Aspirasi::create([
+            'id_siswa'      => $id_siswa,
+            'id_kategori'   => $request->input('id_kategori'),
+            'lokasi'        => $request->input('lokasi'),
+            'keterangan'    => $request->input('keterangan'),
+        ]);
 
-            // TABEL 1: Simpan ke tabel 'aspirasi'
-            $aspirasi = Aspirasi::create([
-                'id_siswa'    => $id_siswa,
-                'id_kategori' => $request->input('id_kategori'),
-                'lokasi'      => $request->input('lokasi'),
-                'keterangan'  => $request->input('keterangan'),
-            ]);
+        Tanggapan::create([
+            'id_aspirasi'   => $aspirasi->id_aspirasi, 
+            'status'        => 'menunggu',
+            'feedback'      => null
+        ]);
 
-            // TABEL 2: Simpan otomatis ke tabel 'tanggapan'
-            // Mengambil 'id_aspirasi' yang baru saja dibuat di atas
-            Tanggapan::create([
-                'id_aspirasi' => $aspirasi->id_aspirasi,
-                'status'      => 'menunggu', // Status awal pengaduan
-                'feedback'    => null,       // Belum ada tanggapan dari admin
-            ]);
-
-        });
-
-        // 3. Redirect kembali dengan pesan sukses
-        return redirect()->route('aspirasi.index')->with('success', 'Aspirasi berhasil dikirim dan sedang menunggu tanggapan!');
+        return $this->redirect('/aspirasi/tambah')->with('success', 'Aspirasi berhasil dikirim');
     }
 }
