@@ -21,21 +21,21 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi disesuaikan menggunakan nama_kategori
+        
         $request->validate([
             'nama_kategori' => 'required|string|max:255',
         ]);
 
-        // 1. Ambil data kategori terakhir untuk menentukan nomor urut berikutnya
+       
         $terakhir = Kategori::orderBy('id_kategori', 'desc')->first();
         
-        // 2. Tentukan nomor urut berikutnya
+        
         $nomorUrut = $terakhir && isset($terakhir->kode_kategori) ? ((int) substr($terakhir->kode_kategori, 3)) + 1 : 1;
         
-        // 3. Format kode otomatis (misal: KTG001)
+        
         $kodeOtomatis = 'KTG' . sprintf("%03d", $nomorUrut);
 
-        // 4. Simpan ke database dengan kolom yang sesuai
+        
         Kategori::create([
             'kode_kategori' => $kodeOtomatis,
             'nama_kategori' => $request->input('nama_kategori'),
@@ -52,7 +52,7 @@ class KategoriController extends Controller
 
     public function update(Request $request, $id_kategori)
     {
-        // Validasi disesuaikan menggunakan nama_kategori
+        
         $request->validate([
             'nama_kategori' => 'required|string|max:225',
         ]);
