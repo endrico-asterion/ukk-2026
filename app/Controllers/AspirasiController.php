@@ -28,31 +28,45 @@ class AspirasiController extends Controller
 
     // Process Simpan Data (1 Input -> 2 Tabel)
     public function store(Request $request)
-    {
-        // 1. Validasi Input dari Form
-        $request->validate([
-            'id_kategori' => 'required',
-            'lokasi'      => 'required|string|max:100',
-            'keterangan'  => 'required|string|max:255',
-        ]);
-
-        // Ambil ID Siswa dari akun yang sedang login / session
-        // (Ubah angka 1 ini dengan auth/session login siswa kamu)
-        $id_siswa = $_SESSION['id_siswa'] ?? $_SESSION['user']['id_siswa'] ?? 1;
-
-         $aspirasi = Aspirasi::create([
-            'id_siswa'      => $id_siswa,
-            'id_kategori'   => $request->input('id_kategori'),
-            'lokasi'        => $request->input('lokasi'),
-            'keterangan'    => $request->input('keterangan'),
-        ]);
-
-        Tanggapan::create([
-            'id_aspirasi'   => $aspirasi->id_aspirasi, 
-            'status'        => 'menunggu',
-            'feedback'      => null
-        ]);
-
-        return $this->redirect('/aspirasi/tambah')->with('success', 'Aspirasi berhasil dikirim');
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
     }
+
+    // Ambil user_id dari session (sesuaikan key-nya dengan struktur login kamu)
+    $userId = $_SESSION['user']['id'] ?? $_SESSION['user_id'] ?? null;
+
+    if (!$userId) {
+        return $this->redirect('/login')->with('error', 'Sesi login habis, silakan login ulang.');
+    }
+
+    // Cari data siswa berdasarkan user_id yang sedang login
+    $siswa = \App\Models\Siswa::where('user_id', $userId)->first();
+
+    if (!$siswa) {
+        return $this->redirect('/login')->with('error', 'Data siswa tidak ditemukan untuk akun ini.');
+    }
+
+    $request->validate([
+        'id_kategori' => 'required',
+        'lokasi'      => 'required|string|max:100',
+        'keterangan'  => 'required|string|max:255',
+    ]);
+
+    $aspirasi = Aspirasi::create([
+        'id_siswa'    => $siswa->id_siswa,
+        'id_kategori' => $request->input('id_kategori'),
+        'lokasi'      => $request->input('lokasi'),
+        'keterangan'  => $request->input('keterangan'),
+    ]);
+
+    Tanggapan::create([
+        'id_aspirasi' => $aspirasi->id_aspirasi,
+        'status'      => 'menunggu',
+        'feedback'    => null,
+    ]);
+
+    return $this->redirect('/aspirasi/tambah')->with('success', 'Aspirasi berhasil dikirim');
 }
+        
+    }
