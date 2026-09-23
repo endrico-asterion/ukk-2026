@@ -65,9 +65,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 
-    Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
-    Route::get('/aspirasi/tambah', [AspirasiController::class, 'create'])->name('aspirasi.create');
-    Route::post('/aspirasi/simpan', [AspirasiController::class, 'store'])->name('aspirasi.store');
+   Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.index');
+   Route::get('/aspirasi/{aspirasi}/edit', [AspirasiController::class, 'edit'])->name('aspirasi.edit');
+   Route::put('/aspirasi/{aspirasi}', [AspirasiController::class, 'update'])->name('aspirasi.update');
+   Route::delete('/aspirasi/{aspirasi}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');
+
+
+    });
+
+    Route::group(['prefix' => 'siswa', 'middleware' => 'siswa'], function() {
+    Route::get('/aspirasi/tambah', [AspirasiController::class, 'create'])->name('siswa.aspirasi.create');
+    Route::post('/aspirasi', [AspirasiController::class, 'store'])->name('siswa.aspirasi.store');
 
     });
 

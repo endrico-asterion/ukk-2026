@@ -85,7 +85,7 @@
             <div class="p-4 p-md-5 rounded-3 bg-gradient bg-primary text-white shadow">
                 <h3 class="fw-bold">Ada Sarana Sekolah yang Rusak?</h3>
                 <p class="mb-4">Laporkan kerusakan fasilitas sekolah seperti meja, kursi, AC, atau fasilitas komputer agar segera diperbaiki oleh tim sarpras.</p>
-                <a href="{{ route('aspirasi.create') }}" class="btn btn-light btn-lg fw-bold text-primary">+ Buat Pengaduan Baru</a>
+                <a href="{{ route('siswa.aspirasi.create') }}" class="btn btn-light btn-lg fw-bold text-primary">+ Buat Pengaduan Baru</a>
             </div>
         </div>
 

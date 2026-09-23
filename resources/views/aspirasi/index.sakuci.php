@@ -3,12 +3,13 @@
 @section('content')
 <div class="container">
     <h2>Aspirasi</h2>
-    <a href="{{ route('aspirasi.create') }}" class="btn btn-primary mb-3">Tambah Aspirasi</a>
+   
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <?php $no = 1; ?>
     <table class="table">
         <thead>
             <tr>
@@ -23,14 +24,15 @@
         <tbody>
             @forelse($data as $item)
             <tr>
-                <td>{{ $loop->iteration }}</td>
+                <td><?= $no++ ?></td>
                 <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
                 <td>{{ $item->lokasi }}</td>
                 <td>{{ $item->keterangan }}</td>
                 <td>{{ $item->tanggapan->status ?? '-' }}</td>
                 <td>
-                    <a href="{{ route('aspirasi.edit', $item->id_aspirasi) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('aspirasi.destroy', $item->id_aspirasi) }}" method="POST" style="display:inline">
+                    <a href="{{ route('aspirasi.edit', ['aspirasi' => $item->id_aspirasi]) }}" class="btn btn-warning btn-sm">Edit</a>
+                    
+                    <form action="{{ route('aspirasi.destroy', ['aspirasi' => $item->id_aspirasi]) }}" method="POST" style="display:inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>

@@ -66,7 +66,7 @@ class AspirasiController extends Controller
         'feedback'    => null,
     ]);
 
-    return $this->redirect('/aspirasi/tambah')->with('success', 'Aspirasi berhasil dikirim');
+    return $this->redirect('/siswa/aspirasi/tambah')->with('success', 'Aspirasi berhasil dikirim');
 }
         
     }
