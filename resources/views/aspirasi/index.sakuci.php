@@ -9,7 +9,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <?php $no = 1; ?>
+   
     <table class="table">
         <thead>
             <tr>
@@ -22,6 +22,7 @@
             </tr>
         </thead>
         <tbody>
+         <?php $no = 1; ?>
             @forelse($data as $item)
             <tr>
                 <td><?= $no++ ?></td>
@@ -47,6 +48,6 @@
         </tbody>
     </table>
 
-    {{ $data->links() }}
+    {!! $data->links() !!}
 </div>
 @endsection
