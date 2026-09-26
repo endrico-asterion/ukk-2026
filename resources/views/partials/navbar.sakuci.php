@@ -30,7 +30,6 @@
                 </svg>
             </button>
             <a class="navbar-brand fw-semibold m-0 d-flex align-items-center gap-2" href="{{ route('home') }}">
-                <span class="brand-mark">P</span>
                 {{ config('app.name') }}
             </a>
         </div>

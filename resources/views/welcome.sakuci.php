@@ -4,20 +4,15 @@
     $totalProses   = \App\Models\Tanggapan::where('status', 'proses')->count();
     $totalSelesai  = \App\Models\Tanggapan::where('status', 'selesai')->count();
 
-    // Kategori pengaduan terbanyak
     $semuaKategori = \App\Models\Kategori::all();
     $kategoriChart = [];
     foreach ($semuaKategori as $k) {
         $jumlah = \App\Models\Aspirasi::where('id_kategori', '=', $k->id_kategori)->count();
-        $kategoriChart[] = [
-            'nama'   => $k->nama_kategori,
-            'jumlah' => $jumlah,
-        ];
+        $kategoriChart[] = ['nama' => $k->nama_kategori, 'jumlah' => $jumlah];
     }
     usort($kategoriChart, fn($a, $b) => $b['jumlah'] <=> $a['jumlah']);
     $maxJumlah = $kategoriChart ? max(array_column($kategoriChart, 'jumlah')) : 0;
 
-    // Pengaduan terbaru
     $terbaru = \App\Models\Aspirasi::orderBy('id_aspirasi', 'desc')->limit(5)->get();
 @endphp
 
@@ -27,41 +22,39 @@
 
 @section('content')
 
-    {{-- Hero --}}
-   <section class="hero-elegant">
+<section class="hero-modern">
     <div class="container">
-        <div class="row g-5 align-items-center">
+        <div class="row g-5 align-items-start">
             <div class="col-lg-6">
-                
-                <h1 class="hero-title mb-3">
-                    Pengaduan <span class="text-brand">86</span>
+                <div class="hero-eyebrow">Sistem Pengaduan Sarana Sekolah</div>
+                <h1 class="hero-title-modern serif-italic mb-0">
+                    Sampaikan aspirasi tentang fasilitas sekolahmu, kapan saja
                 </h1>
-                <p class="text-body-secondary mb-4" style="max-width: 480px;">
-                    Sampaikan aspirasi atau keluhan mengenai fasilitas dan sarana sekolahmu di sini dengan cepat dan transparan.
-                </p>
-                <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-brand px-4" href="/admin/kategori">Lihat Web Pengaduan 86!</a>
-                   
+                <div class="hero-meta">sekali lapor langsung gercep!</div>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <a class="btn-modern-primary" href="#statistik">Lihat Statistik Pengaduan</a>
+                    
                 </div>
             </div>
 
             <div class="col-lg-6">
-                <div class="stat-panel">
-                    <div class="stat-row">
-                        <span class="stat-label">Total Pengaduan</span>
-                        <span class="stat-value">{{ $totalAspirasi ?? 0 }}</span>
+                <div class="stat-grid-modern">
+                    <div class="stat-item-modern">
+                        <div class="stat-value-modern">{{ $totalAspirasi ?? 0 }}</div>
+                        <div class="stat-label-modern">Total pengaduan</div>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Menunggu</span>
-                        <span class="stat-value">{{ $totalMenunggu ?? 0 }}</span>
+                    <div class="stat-item-modern">
+                        <div class="stat-value-modern">{{ $totalMenunggu ?? 0 }}</div>
+                        <div class="stat-label-modern">Menunggu</div>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Proses</span>
-                        <span class="stat-value">{{ $totalProses ?? 0 }}</span>
+                    <div class="stat-item-modern">
+                        <div class="stat-value-modern">{{ $totalProses ?? 0 }}</div>
+                        <div class="stat-label-modern">Proses</div>
                     </div>
-                    <div class="stat-row">
-                        <span class="stat-label">Selesai</span>
-                        <span class="stat-value">{{ $totalSelesai ?? 0 }}</span>
+                    <div class="stat-item-modern">
+                        <div class="stat-value-modern">{{ $totalSelesai ?? 0 }}</div>
+                        <div class="stat-label-modern">Selesai</div>
                     </div>
                 </div>
             </div>
@@ -69,74 +62,68 @@
     </div>
 </section>
 
-        {{-- Chart kategori + List terbaru --}}
-        <div class="row g-4 mb-5">
-            <div class="col-lg-6">
-                <div class="card bg-body-secondary border h-100 shadow-sm card-lift">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-4">Kategori Pengaduan Terbanyak</h5>
-                        @forelse($kategoriChart as $item)
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <span class="fw-medium">{{ $item['nama'] }}</span>
-                                <span class="text-body-secondary">{{ $item['jumlah'] }}</span>
-                            </div>
-                            <div class="progress" style="height: 8px;">
-                                <div class="progress-bar bg-brand" role="progressbar"
-                                     style="width: {{ $maxJumlah > 0 ? round(($item['jumlah'] / $maxJumlah) * 100) : 0 }}%">
-                                </div>
-                            </div>
-                        </div>
-                        @empty
-                        <p class="text-body-secondary mb-0">Belum ada data kategori.</p>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
+<div class="container section-spacing-modern" id="statistik">
 
-            <div class="col-lg-6">
-                <class="card card-elegant h-100">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-4">Pengaduan Terbaru</h5>
-                        @forelse($terbaru as $item)
-                        <div class="d-flex justify-content-between align-items-start border-bottom pb-2 mb-2">
-                            <div>
-                                <div class="fw-medium">{{ $item->kategori->nama_kategori ?? '-' }}</div>
-                                <small class="text-body-secondary">{{ $item->lokasi }}</small>
-                            </div>
-                            <span class="badge text-bg-warning">{{ $item->tanggapan->status ?? 'menunggu' }}</span>
-                        </div>
-                        @empty
-                        <p class="text-body-secondary mb-0">Belum ada pengaduan.</p>
-                        @endforelse
-                    </div>
+    <div class="row g-4 mb-5">
+    <div class="col-lg-6">
+        <div class="surface-modern h-100">
+            <h5 class="surface-title-modern" data-count="{{ count($kategoriChart) }} kategori">Kategori pengaduan terbanyak</h5>
+            @forelse($kategoriChart as $item)
+            <div class="mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span style="font-size: .9rem;">{{ $item['nama'] }}</span>
+                    <span class="text-muted" style="font-size: .85rem;">{{ $item['jumlah'] }}</span>
+                </div>
+                <div class="bar-track-modern">
+                    <div class="bar-fill-modern" style="width: {{ $maxJumlah > 0 ? round(($item['jumlah'] / $maxJumlah) * 100) : 0 }}%"></div>
                 </div>
             </div>
+            @empty
+            <p class="text-muted mb-0">Belum ada data kategori.</p>
+            @endforelse
         </div>
-
-        {{-- CTA --}}
-        <div class="row g-4 align-items-center mb-5">
-            <div class="col-lg-7">
-                <div class="p-4 p-md-5 rounded-3 text-bg-primary shadow">
-                    <h3 class="fw-bold">Ada Sarana Sekolah yang Rusak?</h3>
-                    <p class="mb-4">Laporkan kerusakan fasilitas sekolah seperti meja, kursi, AC, atau fasilitas komputer agar segera diperbaiki oleh tim sarpras.</p>
-                    <a href="{{ route('siswa.aspirasi.create') }}" class="btn btn-light btn-lg fw-bold text-primary">+ Buat Pengaduan Baru</a>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="card bg-body-secondary border p-3 h-100">
-                    <h5 class="fw-bold mb-3 text-warning">Cara Mengirim Pengaduan</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2">1. Klik tombol <strong>Buat Pengaduan Baru</strong>.</li>
-                        <li class="mb-2">2. Pilih kategori sarana dan isi lokasi kerusakan.</li>
-                        <li class="mb-2">3. Tuliskan deskripsi detail permasalahan.</li>
-                        <li class="mb-2">4. Kirim dan pantau statusnya di menu <strong>Riwayat</strong>.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+    <div class="col-lg-6">
+        <div class="surface-modern h-100">
+            <h5 class="surface-title-modern" data-count="{{ count($terbaru) }} aktif">Pengaduan terbaru</h5>
+            @forelse($terbaru as $item)
+            @php $status = $item->tanggapan->status ?? 'menunggu'; @endphp
+            <div class="list-row-modern">
+                <div>
+                    <div style="font-size: .9rem; font-weight: 500;">{{ $item->kategori->nama_kategori ?? '-' }}</div>
+                    <small class="text-muted">{{ $item->lokasi }}</small>
+                </div>
+                <span class="pill-modern status-{{ $status }}">{{ $status }}</span>
+            </div>
+            @empty
+            <p class="text-muted mb-0">Belum ada pengaduan.</p>
+            @endforelse
+        </div>
+    </div>
+</div>
+
+    <div class="row g-4 align-items-stretch">
+    <div class="col-lg-7">
+        <div class="cta-modern h-100">
+            <h3 class="serif-italic mb-3" style="font-size: 1.6rem; font-weight: 500;">Ada sarana sekolah yang rusak?</h3>
+            <p class="mb-4 text-muted">Laporkan kerusakan fasilitas sekolah seperti meja, kursi, AC, atau fasilitas komputer agar segera diperbaiki oleh tim sarpras.</p>
+            <a href="{{ route('siswa.aspirasi.create') }}" class="btn-modern-light">Buat Pengaduan Baru</a>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="surface-modern h-100">
+            <h5 class="surface-title-modern">Cara mengirim pengaduan</h5>
+            <div class="step-item-modern">1. Klik tombol <strong>Buat Pengaduan Baru</strong></div>
+            <div class="step-item-modern">2. Pilih kategori sarana dan isi lokasi kerusakan</div>
+            <div class="step-item-modern">3. Tuliskan deskripsi detail permasalahan</div>
+            <div class="step-item-modern">4. Kirim dan pantau statusnya di menu <strong>Riwayat</strong></div>
+        </div>
+    </div>
+</div>
+    </div>
+
+</div>
 
 @endsection

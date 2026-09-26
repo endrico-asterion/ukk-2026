@@ -7,9 +7,9 @@ html, body {
 }
 
 :root {
-    --brand: #c2410c;
-    --brand-dark: #9a3412;
-    --brand-subtle: #fff7ed;
+    --brand: #1d4ed8;
+    --brand-dark: #1e40af;
+    --brand-subtle: #eff6ff;
 }
 
 body {
@@ -243,13 +243,13 @@ code.inline {
 [data-bs-theme="dark"] .badge-brand,
 [data-bs-theme="dark"] .bg-brand-subtle,
 [data-bs-theme="dark"] .step-number {
-    background-color: rgba(194, 65, 12, .18) !important;
+    background-color: rgba(	29, 78, 216, .18) !important;
     color: #fb923c;
 }
 
 [data-bs-theme="dark"] .demo-box {
-    background-color: rgba(194, 65, 12, .18);
-    border-color: rgba(194, 65, 12, .4);
+    background-color: rgba(	29, 78, 216, .18);
+    border-color: rgba(	29, 78, 216, .4);
     color: #fb923c;
 }
 
@@ -268,73 +268,12 @@ code.inline {
     border-bottom: 1px solid var(--bs-border-color);
 }
 
-/* ===== Hero elegan, tanpa glow ===== */
-
-.hero-elegant {
-    padding-block: 4rem;
-    border-bottom: 1px solid var(--bs-border-color);
-}
 
 
 
-.hero-title {
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -.02em;
-}
 
-/* Panel statistik gelap-elegan di sisi kanan hero */
-.stat-panel {
-    background: #14161a;
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 16px;
-    padding: 1.75rem;
-}
 
-[data-bs-theme="light"] .stat-panel {
-    background: #1a1d23;
-}
 
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-block: .85rem;
-    border-bottom: 1px solid rgba(255, 255, 255, .08);
-}
-
-.stat-row:last-child {
-    border-bottom: none;
-}
-
-.stat-row .stat-label {
-    font-size: .8rem;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    color: rgba(255, 255, 255, .55);
-}
-
-.stat-row .stat-value {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.stat-row .stat-value.accent { color: var(--brand); }
-
-/* Kartu konten (chart, list, cara pengaduan) -- versi lebih flat, tidak seperti card Bootstrap default */
-.card-elegant {
-    background: transparent;
-    border: 1px solid var(--bs-border-color);
-    border-left: 3px solid var(--brand);
-    border-radius: 4px;
-    transition: border-color .2s ease;
-}
-
-.card-elegant:hover {
-    border-left-color: var(--brand-dark);
-}
 
 /* Kartu dengan efek angkat halus saat hover */
 .card-lift {
@@ -409,12 +348,267 @@ code.inline {
     transform: translateY(-100%);
     transition: transform .3s ease;
     z-index: 1030;
-    background: color-mix(in srgb, var(--bs-body-bg) 92%, transparent);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--bs-border-color);
+    background: var(--midnight);
+    border-bottom: 1px solid var(--midnight-glow);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, .3);
 }
 
 .navbar-custom.navbar-visible {
     transform: translateY(0);
+}
+/* ===== Font editorial ===== */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.serif-italic {
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+}
+
+/* ===== Palet monokrom hangat ===== */
+:root {
+   --surface-dark: #1c1917;
+    --surface-dark-alt: #12172a;
+    --hairline-dark: rgba(255, 255, 255, .08);
+    --muted-dark: rgba(255, 255, 255, .5);
+}
+
+[data-bs-theme="dark"] body {
+    background: var(--midnight);
+}
+
+[data-bs-theme="light"] {
+    --hairline-dark: rgba(0, 0, 0, .08);
+    --muted-dark: rgba(0, 0, 0, .5);
+}
+
+[data-bs-theme="light"] body {
+    background: #faf9f7;
+}
+
+/* ===== Hero editorial ===== */
+.hero-modern {
+    padding-block: 4rem 3rem;
+    border-bottom: 1px solid var(--hairline-dark);
+}
+
+.hero-eyebrow {
+    font-size: .8rem;
+    color: var(--muted-dark);
+    margin-bottom: .5rem;
+}
+
+.hero-title-modern {
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 500;
+    line-height: 1.3;
+    max-width: 620px;
+}
+
+.hero-title-modern .text-brand {
+    font-style: normal;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.hero-meta {
+    font-size: .85rem;
+    color: var(--muted-dark);
+    margin-top: .75rem;
+}
+
+/* ===== Grid statistik minimal, dipisah garis tipis ===== */
+.stat-grid-modern {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--hairline-dark);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.stat-item-modern {
+    padding: 1.5rem 1.75rem;
+    border-right: 1px solid var(--hairline-dark);
+    border-bottom: 1px solid var(--hairline-dark);
+}
+
+.stat-item-modern:nth-child(2n) {
+    border-right: none;
+}
+
+.stat-item-modern:nth-child(n+3) {
+    border-bottom: none;
+}
+
+.stat-icon-modern { display: none; }
+
+.stat-value-modern {
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: .4rem;
+}
+
+.stat-value-modern.accent { color: var(--brand); }
+
+.stat-label-modern {
+    font-size: .8rem;
+    color: var(--muted-dark);
+}
+
+/* ===== Surface / kartu editorial ===== */
+.section-spacing-modern {
+    margin-block: 3.5rem;
+}
+
+.surface-modern {
+    background: transparent;
+    border: 1px solid var(--hairline-dark);
+    border-radius: 12px;
+    padding: 1.75rem;
+}
+
+.surface-title-modern {
+    font-size: .95rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: inherit;
+}
+
+.surface-title-modern::after {
+    content: attr(data-count);
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--muted-dark);
+}
+
+/* Baris list bergaya hairline (seperti "Area terpantau") */
+.list-row-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--hairline-dark);
+}
+
+.list-row-modern:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.list-row-modern:first-child {
+    padding-top: 0;
+}
+
+/* Badge pudar/muted, bukan solid terang */
+.pill-modern {
+    font-size: .75rem;
+    font-weight: 500;
+    padding: .3rem .75rem;
+    border-radius: 100px;
+    text-transform: capitalize;
+    background: rgba(255, 255, 255, .08);
+    color: var(--muted-dark);
+    white-space: nowrap;
+}
+
+.pill-modern.status-menunggu {
+    background: rgba(29, 78, 216, .15);
+    color: #8ab4e8;
+}
+
+.pill-modern.status-selesai {
+    background: rgba(74, 124, 89, .15);
+    color: #8fb99c;
+}
+
+.pill-modern.status-proses {
+    background: rgba(180, 150, 90, .15);
+    color: #cbb27e;
+}
+
+/* Bar chart minimal, tipis */
+.bar-track-modern {
+    height: 3px;
+    border-radius: 100px;
+    background: var(--hairline-dark);
+    overflow: hidden;
+}
+
+.bar-fill-modern {
+    height: 100%;
+    background: var(--brand);
+}
+
+/* CTA lebih tenang, tidak gradient mencolok */
+.cta-modern {
+    background: var(--surface-dark-alt);
+    border: 1px solid var(--hairline-dark);
+    border-radius: 12px;
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+[data-bs-theme="light"] .cta-modern {
+    background: #fff;
+}
+
+.btn-modern-light {
+    background: var(--brand);
+    color: #fff;
+    padding: .65rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+    transition: opacity .15s ease;
+}
+
+.btn-modern-light:hover {
+    opacity: .85;
+    color: #fff;
+}
+
+.step-item-modern {
+    font-size: .9rem;
+    color: var(--muted-dark);
+    padding-block: .6rem;
+    border-bottom: 1px solid var(--hairline-dark);
+}
+
+.step-item-modern:last-child { border-bottom: none; }
+.step-num-modern { display: none; }
+
+.btn-modern-primary, .btn-modern-ghost {
+    padding: .65rem 1.5rem;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+.btn-modern-primary {
+    background: var(--brand);
+    color: #fff;
+}
+
+.btn-modern-ghost {
+    border: 1px solid var(--hairline-dark);
+    color: inherit;
+}
+
+.footer-custom {
+    background: linear-gradient(180deg, var(--midnight), #060810);
+    border-top: 1px solid var(--midnight-glow) !important;
+}
+html {
+    scroll-behavior: smooth;
 }

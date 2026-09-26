@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('app.name'))</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     {{-- Terapkan tema tersimpan sebelum apa pun dirender, supaya tidak ada flash warna --}}
     <script>
         (function () {
@@ -18,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
-<body class="d-flex flex-column min-vh-100 bg-body-tertiary">
+<body class="d-flex flex-column min-vh-100">
 
 
 @include('partials.navbar')
