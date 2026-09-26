@@ -20,6 +20,7 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-body-tertiary">
 
+
 @include('partials.navbar')
 
 <main class="container flex-grow-1 py-4 py-lg-5">

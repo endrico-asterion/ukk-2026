@@ -1,4 +1,15 @@
-<nav class="navbar navbar-expand-lg bg-body border-bottom sticky-top">
+{{-- Zona tak terlihat untuk gesture swipe dari tepi atas layar --}}
+
+
+{{-- Tab kecil di tengah atas untuk membuka/menutup navbar --}}
+<button id="navbarPullTab" type="button" class="navbar-pull-tab"
+        aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="menuNavbar">
+    <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 2L10 8L18 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+<nav id="menuNavbar" class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
         <div class="d-flex align-items-center gap-2">
             @php
@@ -18,7 +29,10 @@
                     <circle cx="16" cy="16" r="9" fill="{{ $dbConnected ? '#28a745' : '#dc3545' }}"/>
                 </svg>
             </button>
-            <a class="navbar-brand fw-semibold m-0" href="{{ route('home') }}">{{ config('app.name') }}</a>
+            <a class="navbar-brand fw-semibold m-0 d-flex align-items-center gap-2" href="{{ route('home') }}">
+                <span class="brand-mark">P</span>
+                {{ config('app.name') }}
+            </a>
         </div>
 
         <button class="navbar-toggler border-0" type="button"
@@ -27,7 +41,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        {{-- Tambahkan menu aplikasi Anda di sini --}}
         <div class="collapse navbar-collapse" id="menuUtama">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
                 <li class="nav-item">
@@ -80,3 +93,73 @@
         </div>
     </div>
 </nav>
+
+<script>
+(function () {
+    const navbar = document.getElementById('menuNavbar');
+    const tab = document.getElementById('navbarPullTab');
+
+    function openNavbar() {
+        navbar.classList.add('navbar-visible');
+        tab.classList.add('tab-open');
+        tab.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeNavbar() {
+        navbar.classList.remove('navbar-visible');
+        tab.classList.remove('tab-open');
+        tab.setAttribute('aria-expanded', 'false');
+    }
+
+    tab.addEventListener('click', function () {
+        navbar.classList.contains('navbar-visible') ? closeNavbar() : openNavbar();
+    });
+
+    document.addEventListener('click', function (e) {
+        if (navbar.classList.contains('navbar-visible') &&
+            !navbar.contains(e.target) &&
+            !tab.contains(e.target)) {
+            closeNavbar();
+        }
+    });
+
+    let touchStartY = 0;
+    let isSwiping = false;
+
+    document.addEventListener('touchstart', function (e) {
+        if (e.touches[0].clientY < 60) {
+            touchStartY = e.touches[0].clientY;
+            isSwiping = true;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+        if (!isSwiping) return;
+        const diff = e.touches[0].clientY - touchStartY;
+
+        if (diff > 40) {
+            openNavbar();
+            isSwiping = false;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function () {
+        isSwiping = false;
+    });
+
+    navbar.addEventListener('touchstart', function (e) {
+        touchStartY = e.touches[0].clientY;
+        isSwiping = true;
+    }, { passive: true });
+
+    navbar.addEventListener('touchmove', function (e) {
+        if (!isSwiping) return;
+        const diff = e.touches[0].clientY - touchStartY;
+
+        if (diff < -40) {
+            closeNavbar();
+            isSwiping = false;
+        }
+    }, { passive: true });
+})();
+</script>
