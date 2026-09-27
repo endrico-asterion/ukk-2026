@@ -106,9 +106,9 @@
     <div class="row g-4 align-items-stretch">
     <div class="col-lg-7">
         <div class="cta-modern h-100">
-            <h3 class="serif-italic mb-3" style="font-size: 1.6rem; font-weight: 500;">Ada sarana sekolah yang rusak?</h3>
-            <p class="mb-4 text-muted">Laporkan kerusakan fasilitas sekolah seperti meja, kursi, AC, atau fasilitas komputer agar segera diperbaiki oleh tim sarpras.</p>
-            <a href="{{ route('siswa.aspirasi.create') }}" class="btn-modern-light">Buat Pengaduan Baru</a>
+            <h3 class="serif-italic mb-3" style="font-size: 1.6rem; font-weight: 500;">Ada saran aspirasi yang mau disampaikan?</h3>
+            <p class="mb-4 text-muted">berikan aspirasi mu tentang kinerja tim sarpras, fasilitas sekolah dan juga hal lain tentang sekolah</p>
+            <a href="{{ route('siswa.aspirasi.create') }}" class="btn-modern-light">Berikan Aspirasi Mu</a>
         </div>
     </div>
 
