@@ -114,8 +114,8 @@
 
     <div class="col-lg-5">
         <div class="surface-modern h-100">
-            <h5 class="surface-title-modern">Cara mengirim pengaduan</h5>
-            <div class="step-item-modern">1. Klik tombol <strong>Buat Pengaduan Baru</strong></div>
+            <h5 class="surface-title-modern">Cara mengirim aspirasi</h5>
+            <div class="step-item-modern">1. Klik tombol <strong>Berikan Aspirasi Mu</strong></div>
             <div class="step-item-modern">2. Pilih kategori sarana dan isi lokasi kerusakan</div>
             <div class="step-item-modern">3. Tuliskan deskripsi detail permasalahan</div>
             <div class="step-item-modern">4. Kirim dan pantau statusnya di menu <strong>Riwayat</strong></div>
