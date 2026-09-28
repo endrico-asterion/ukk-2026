@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `aspirasi` (
     id_kategori         INT UNSIGNED NOT NULL,
     lokasi              VARCHAR(100) NOT NULL,
     keterangan          VARCHAR(255) NOT NULL,
+    foto                VARCHAR(255) NOT NULL,
     created_at DATETIME NULL,
     updated_at DATETIME NULL,
     FOREIGN KEY (id_siswa) REFERENCES siswa(id_siswa) ON DELETE CASCADE,
