@@ -24,9 +24,9 @@
             <button id="themeToggle" type="button" class="logo-toggle"
                     aria-label="Ganti tema terang/gelap (status database: {{ $dbConnected ? 'terhubung' : 'tidak terhubung' }})"
                     title="Ganti tema terang/gelap">
-                <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" style="display: block;" aria-hidden="true">
-                    <circle class="logo-ring" cx="16" cy="16" r="15"/>
-                    <circle cx="16" cy="16" r="9" fill="{{ $dbConnected ? '#28a745' : '#dc3545' }}"/>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>
                 </svg>
             </button>
             <a class="navbar-brand fw-semibold m-0 d-flex align-items-center gap-2" href="{{ route('home') }}">
@@ -45,9 +45,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ is_route('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ is_route('docs') ? 'active' : '' }}" href="{{ route('docs') }}">Docs</a>
-                </li>
+                
                 @php
                     $currentUser = \App\Models\User::current();
                 @endphp
@@ -99,16 +97,18 @@
     const tab = document.getElementById('navbarPullTab');
 
     function openNavbar() {
-        navbar.classList.add('navbar-visible');
-        tab.classList.add('tab-open');
-        tab.setAttribute('aria-expanded', 'true');
-    }
+    navbar.classList.add('navbar-visible');
+    tab.classList.add('tab-open');
+    tab.setAttribute('aria-expanded', 'true');
+    document.body.style.paddingTop = navbar.offsetHeight + 'px';
+}
 
-    function closeNavbar() {
-        navbar.classList.remove('navbar-visible');
-        tab.classList.remove('tab-open');
-        tab.setAttribute('aria-expanded', 'false');
-    }
+function closeNavbar() {
+    navbar.classList.remove('navbar-visible');
+    tab.classList.remove('tab-open');
+    tab.setAttribute('aria-expanded', 'false');
+    document.body.style.paddingTop = '0px';
+}
 
     tab.addEventListener('click', function () {
         navbar.classList.contains('navbar-visible') ? closeNavbar() : openNavbar();
