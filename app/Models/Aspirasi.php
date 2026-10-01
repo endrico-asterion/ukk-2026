@@ -25,5 +25,14 @@ class Aspirasi extends Model
     {
     return $this->hasOne(\App\Models\Tanggapan::class, 'id_aspirasi', 'id_aspirasi');
     }
+
+    public function siswa()
+
+    {
+
+    return $this->belongsTo(\App\Models\Siswa::class, 'id_siswa', 'id_siswa');
+    
+    }
+
 }
 

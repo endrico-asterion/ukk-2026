@@ -14,10 +14,40 @@ class AspirasiController extends Controller
 {
     
     public function index(Request $request)
-    {
-        $data = Aspirasi::orderBy('id_aspirasi', 'desc')->paginate(10);
-        return $this->view('aspirasi.index', compact('data'));
+{
+    $filter = [
+        'tanggal'     => $request->input('tanggal'),
+        'bulan'       => $request->input('bulan'),
+        'id_siswa'    => $request->input('id_siswa'),
+        'id_kategori' => $request->input('id_kategori'),
+    ];
+
+    $query = Aspirasi::orderBy('id_aspirasi', 'desc');
+
+    if ($filter['tanggal']) {
+        $query = $query->where('created_at', '>=', $filter['tanggal'] . ' 00:00:00')
+                       ->where('created_at', '<=', $filter['tanggal'] . ' 23:59:59');
+    } elseif ($filter['bulan']) {
+        $awal  = $filter['bulan'] . '-01 00:00:00';
+        $akhir = date('Y-m-t', strtotime($awal)) . ' 23:59:59';
+        $query = $query->where('created_at', '>=', $awal)
+                       ->where('created_at', '<=', $akhir);
     }
+
+    if ($filter['id_siswa']) {
+        $query = $query->where('id_siswa', $filter['id_siswa']);
+    }
+
+    if ($filter['id_kategori']) {
+        $query = $query->where('id_kategori', $filter['id_kategori']);
+    }
+
+    $data     = $query->paginate(10);
+    $kategori = Kategori::all();
+    $siswa    = \App\Models\Siswa::all();
+
+    return $this->view('aspirasi.index', compact('data', 'kategori', 'siswa', 'filter'));
+}
 
    
     public function create(Request $request)
