@@ -54,6 +54,29 @@
                         <a class="nav-link {{ is_route('admin.dashboard', 'dashboard') ? 'active' : '' }}"
                            href="{{ $currentUser->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}">Dashboard</a>
                     </li>
+
+                @if ($currentUser->role === 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ is_route('kategori.index', 'kategori.create', 'kategori.edit') ? 'active' : '' }}"
+                           href="{{ route('kategori.index') }}">Kategori</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link {{ is_route('alat.index', 'alat.create', 'alat.edit') ? 'active' : '' }}"
+                           href="{{ route('alat.index') }}">Alat</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link {{ is_route('aspirasi.index', 'aspirasi.edit') ? 'active' : '' }}"
+                           href="{{ route('aspirasi.index') }}">Aspirasi</a>
+                    </li>
+                @endif 
+
+                @if ($currentUser->role === 'siswa')
+                    <li class="nav-item">
+                    <a class="nav-link {{ is_route('siswa.aspirasi.index', 'siswa.aspirasi.create', 'siswa.aspirasi.edit') ? 'active' : '' }}"
+                           href="{{ route('siswa.aspirasi.index') }}">Aspirasi Saya</a>
+                    </li>
+                @endif
+
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}" class="d-lg-inline">
                             @csrf

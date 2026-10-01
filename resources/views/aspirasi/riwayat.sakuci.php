@@ -2,49 +2,49 @@
 
 @section('content')
 <div class="container">
-    <h2>Aspirasi</h2>
-   
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="m-0">Aspirasi Saya</h2>
+        <a href="{{ route('siswa.aspirasi.create') }}" class="btn btn-primary">Tambah Aspirasi</a>
+    </div>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
-   
     <table class="table">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Alat</th>
                 <th>Kategori</th>
+                <th>Alat</th>
                 <th>Lokasi</th>
                 <th>Keterangan</th>
                 <th>Status</th>
+                <th>Feedback</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-         <?php $no = 1; ?>
+            <?php $no = 1; ?>
             @forelse($data as $item)
             <tr>
                 <td><?= $no++ ?></td>
-                <td>{{ $item->alat->nama_alat ?? '-' }}</td>
                 <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
+                <td>{{ $item->alat->nama_alat ?? '-' }}</td>
                 <td>{{ $item->lokasi }}</td>
                 <td>{{ $item->keterangan }}</td>
                 <td>{{ $item->tanggapan->status ?? '-' }}</td>
+                <td>{{ $item->tanggapan->feedback ?? '-' }}</td>
                 <td>
-                    <a href="{{ route('aspirasi.edit', ['aspirasi' => $item->id_aspirasi]) }}" class="btn btn-warning btn-sm">Edit</a>
-                    
-                    <form action="{{ route('aspirasi.destroy', ['aspirasi' => $item->id_aspirasi]) }}" method="POST" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                    </form>
+                    <a href="{{ route('siswa.aspirasi.edit', ['aspirasi' => $item->id_aspirasi]) }}" class="btn btn-warning btn-sm">Edit</a>
                 </td>
             </tr>
             @empty
             <tr>
-                <td colspan="6">Belum ada data aspirasi.</td>
+                <td colspan="8">Belum ada aspirasi yang kamu kirim.</td>
             </tr>
             @endforelse
         </tbody>

@@ -85,6 +85,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/aspirasi/tambah', [AspirasiController::class, 'create'])->name('siswa.aspirasi.create');
     Route::post('/aspirasi', [AspirasiController::class, 'store'])->name('siswa.aspirasi.store');
 
+    Route::get('/aspirasi', [AspirasiController::class, 'riwayat'])->name('siswa.aspirasi.index');
+    Route::get('/aspirasi/{aspirasi}/edit', [AspirasiController::class, 'editSiswa'])->name('siswa.aspirasi.edit');
+    Route::put('/aspirasi/{aspirasi}', [AspirasiController::class, 'updateSiswa'])->name('siswa.aspirasi.update');
+
     });
 
 /*

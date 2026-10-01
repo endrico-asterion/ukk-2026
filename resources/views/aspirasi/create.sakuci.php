@@ -20,6 +20,16 @@
             </select>
         </div>
 
+        <div class="form-group mb-3">
+            <label for="id_alat">Alat / Sarana (opsional):</label>
+            <select name="id_alat" id="id_alat" class="form-control">
+                <option value="">-- Tidak ada / Lainnya --</option>
+                @foreach($alat as $a)
+                    <option value="{{ $a->id_alat }}" data-kategori="{{ $a->id_kategori }}">{{ $a->nama_alat }}</option>    
+                @endforeach
+                </select>
+        </div>
+
         
         <div class="form-group mb-3">
             <label for="lokasi">Lokasi Kejadian / Ruangan:</label>

@@ -21,4 +21,5 @@ class Alat extends Model
     return $this->belongsTo(kategori::class, 'id_kategori', 'id_kategori');
 
     }   
+
 }
