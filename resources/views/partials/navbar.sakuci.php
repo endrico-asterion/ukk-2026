@@ -75,6 +75,11 @@
                     <a class="nav-link {{ is_route('siswa.aspirasi.index', 'siswa.aspirasi.create', 'siswa.aspirasi.edit') ? 'active' : '' }}"
                            href="{{ route('siswa.aspirasi.index') }}">Aspirasi Saya</a>
                     </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link {{ is_route('siswa.aspirasi.index', 'siswa.aspirasi.create', 'siswa.aspirasi.edit') ? 'active' : '' }}"
+                           href="{{ route('siswa.aspirasi.create') }}">berikan aspirasi</a>
+                    </li>
                 @endif
 
                     <li class="nav-item">
