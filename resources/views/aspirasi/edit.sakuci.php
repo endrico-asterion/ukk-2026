@@ -9,6 +9,18 @@
         <tr><th>Alat</th><td>{{ $aspirasi->alat->nama_alat ?? '-' }}</td></tr>
         <tr><th>Lokasi</th><td>{{ $aspirasi->lokasi }}</td></tr>
         <tr><th>Keterangan</th><td>{{ $aspirasi->keterangan }}</td></tr>
+        <tr>
+        <th>Foto</th>
+        <td>
+        @if($aspirasi->foto)
+            <a href="/uploads/aspirasi/{{ $aspirasi->foto }}" target="_blank">
+                <img src="/uploads/aspirasi/{{ $aspirasi->foto }}" alt="Foto" style="max-height:200px;">
+            </a>
+        @else
+            -
+        @endif
+        </td>
+        </tr>
     </table>
 
     <form action="{{ route('aspirasi.update', ['aspirasi' => $aspirasi->id_aspirasi]) }}" method="POST">

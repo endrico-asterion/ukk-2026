@@ -20,6 +20,7 @@
                 <th>No</th>
                 <th>Kategori</th>
                 <th>Alat</th>
+                <th>Foto</th>
                 <th>Lokasi</th>
                 <th>Keterangan</th>
                 <th>Status</th>
@@ -34,6 +35,15 @@
                 <td><?= $no++ ?></td>
                 <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
                 <td>{{ $item->alat->nama_alat ?? '-' }}</td>
+                <td>
+                 @if($item->foto)
+                <a href="/uploads/aspirasi/{{ $item->foto }}" target="_blank">
+                <img src="/uploads/aspirasi/{{ $item->foto }}" alt="Foto" style="height:50px;">
+                </a>
+                @else
+                -
+                @endif
+                </td>
                 <td>{{ $item->lokasi }}</td>
                 <td>{{ $item->keterangan }}</td>
                 <td>{{ $item->tanggapan->status ?? '-' }}</td>

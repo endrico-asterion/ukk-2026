@@ -84,11 +84,12 @@
                     @php
                         $status  = $item->tanggapan->status ?? 'menunggu';
                         $katNama = $item->kategori->nama_kategori ?? '-';
+                        $alatNama = $item->alat->nama_alat ?? '-';
                         $tgl     = $item->created_at ? date('d M Y', strtotime($item->created_at)) : '-';
                         $fotoUrl = $item->foto ? asset('uploads/aspirasi/' . $item->foto) : '';
                     @endphp
                     <button type="button" class="wl-card"
-                            data-kat="{{ $katNama }}" data-status="{{ $status }}"
+                            data-kat="{{ $katNama }}" data-alat="{{ $alatNama }}" data-status="{{ $status }}"
                             data-lokasi="{{ $item->lokasi }}" data-ket="{{ $item->keterangan }}"
                             data-tgl="{{ $tgl }}" data-foto="{{ $fotoUrl }}">
                         <div class="wl-thumb">
@@ -104,7 +105,7 @@
                         </div>
                         <div>
                             <div class="wl-card-head"><h3>{{ $katNama }}</h3><span class="wl-muted wl-small">{{ $tgl }}</span></div>
-                            <p class="wl-muted wl-clip">{{ $item->lokasi }}: {{ mb_strimwidth($item->keterangan, 0, 90, '...') }}</p>
+                            <p class="wl-muted wl-clip">{{ $item->lokasi }}{{ $alatNama !== '-' ? ' · ' . $alatNama : '' }}: {{ mb_strimwidth($item->keterangan, 0, 90, '...') }}</p>
                             <div class="wl-card-foot"><span class="wl-pill {{ $status }}">{{ $status }}</span><span class="wl-link">Lihat detail</span></div>
                         </div>
                     </button>
@@ -149,6 +150,7 @@
             <h3 id="wlPKat" class="wl-ptitle"></h3>
             <span id="wlPStatus" class="wl-pill"></span>
             <dl class="wl-dl">
+                <div><dt>Alat</dt><dd id="wlPAlat"></dd></div>
                 <div><dt>Lokasi</dt><dd id="wlPLokasi"></dd></div>
                 <div><dt>Keterangan</dt><dd id="wlPKet"></dd></div>
             </dl>
@@ -221,6 +223,7 @@
         terakhir = k;
         isi('wlPKat', k.getAttribute('data-kat'));
         isi('wlPTgl', k.getAttribute('data-tgl'));
+        isi('wlPAlat', k.getAttribute('data-alat'));
         isi('wlPLokasi', k.getAttribute('data-lokasi'));
         isi('wlPKet', k.getAttribute('data-ket'));
         var s = k.getAttribute('data-status');

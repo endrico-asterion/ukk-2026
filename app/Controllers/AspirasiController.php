@@ -86,12 +86,20 @@ class AspirasiController extends Controller
         'keterangan'  => 'required|string|max:255',
     ]);
 
+    $foto = $this->simpanFoto();
+
+    if ($foto === false) {
+    return $this->redirect('/siswa/aspirasi/tambah')
+        ->with('error', 'Foto tidak valid. Gunakan JPG, PNG, atau WEBP maksimal 2 MB.');
+    }
+
     $aspirasi = Aspirasi::create([
         'id_siswa'    => $siswa->id_siswa,
         'id_kategori' => $request->input('id_kategori'),
-        'id_alat'    => $request->input('id_alat') ?: null,
+        'id_alat'     => $request->input('id_alat') ?: null,
         'lokasi'      => $request->input('lokasi'),
         'keterangan'  => $request->input('keterangan'),
+        'foto'        => $foto, 
     ]);
 
     Tanggapan::create([
@@ -133,6 +141,51 @@ class AspirasiController extends Controller
     }
 
     return $this->redirect('/admin/aspirasi')->with('success', 'Status aspirasi berhasil diperbarui');
+    }
+
+     /**
+    * Simpan foto aspirasi (opsional).
+    * Mengembalikan: null = tidak ada file, false = file tidak valid, string = nama file tersimpan.
+    */
+    private function simpanFoto()
+    {
+    if (!isset($_FILES['foto']) || $_FILES['foto']['error'] === UPLOAD_ERR_NO_FILE) {
+        return null;
+    }
+
+    $file = $_FILES['foto'];
+
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        return false;
+    }
+
+    if ($file['size'] > 2 * 1024 * 1024) {
+        return false;
+    }
+
+    $ext   = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $boleh = ['jpg', 'jpeg', 'png', 'webp'];
+
+    if (!in_array($ext, $boleh)) {
+        return false;
+    }
+
+    if (!@getimagesize($file['tmp_name'])) {
+        return false;
+    }
+
+    $folder = $_SERVER['DOCUMENT_ROOT'] . '/uploads/aspirasi';
+    if (!is_dir($folder)) {
+        mkdir($folder, 0775, true);
+    }
+
+    $nama = 'asp_' . date('YmdHis') . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+
+    if (!move_uploaded_file($file['tmp_name'], $folder . '/' . $nama)) {
+        return false;
+    }
+
+    return $nama;
     }
 
     public function destroy(Request $request, $aspirasi)

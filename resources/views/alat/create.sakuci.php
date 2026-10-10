@@ -17,7 +17,9 @@
             @endforeach
         </select>
 
+        <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
     </form>
 </div>
 @endsection
