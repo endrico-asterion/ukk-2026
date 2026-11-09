@@ -31,6 +31,18 @@
                             <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label" for="nis">NIS</label>
+                            <input type="text" id="nis" name="nis" value="{{ old('nis') }}" class="form-control {{ errors()->has('nis') ? 'is-invalid' : '' }}">
+                            @error('nis') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="kelas">Kelas</label>
+                            <input type="text" id="kelas" name="kelas" value="{{ old('kelas') }}" placeholder="Contoh: XII RPL 1" class="form-control {{ errors()->has('kelas') ? 'is-invalid' : '' }}">
+                            @error('kelas') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
                         @if (count($roles) > 1)
                             <div class="mb-3">
                                 <label class="form-label" for="role">Daftar sebagai</label>

@@ -38,12 +38,20 @@ class AuthController extends Controller
             'username' => 'required|min:3|max:50|alpha_dash|unique:users,username',
             'password' => 'required|min:6|confirmed',
             'role'     => 'required|in:' . implode(',', $allowed),
+            'nis'      => 'required|unique:siswa,nis',
+            'kelas'    => 'required|max:10',
         ]);
 
         $user = User::create([
             'username' => $data['username'],
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),
             'role'     => $data['role'],
+        ]);
+        
+        \App\Models\Siswa::create([
+            'user_id' => $user->id,
+            'nis'     => $data['nis'],
+            'kelas'   => $data['kelas'],
         ]);
 
         Session::put('user_id', $user->id);
