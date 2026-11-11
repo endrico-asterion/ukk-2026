@@ -11,7 +11,7 @@ class Alat extends Model
     protected static ?string $table = 'alat';
     protected string $primaryKey = 'id_alat';
 
-    protected array $fillable = ['kode_alat', 'nama_alat', 'id_kategori'];
+    protected array $fillable = ['kode_alat', 'nama_alat', 'id_kategori', 'stok'];
 
 
     public function kategori()

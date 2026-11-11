@@ -17,6 +17,9 @@
             @endforeach
         </select>
 
+        <label>Stok</label>
+            <input type="number" name="stok" class="form-control" min="0" value="0" required>
+
         <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Simpan</button>
         </div>

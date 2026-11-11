@@ -42,6 +42,12 @@ class AuthController extends Controller
             'kelas'    => 'required|max:10',
         ]);
 
+        if (strlen($data['nis']) > 20) {
+            return back()
+            ->withErrors(['nis' => 'NIS maksimal 20 karakter.'])
+            ->withInput();
+        }
+
         $user = User::create([
             'username' => $data['username'],
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),

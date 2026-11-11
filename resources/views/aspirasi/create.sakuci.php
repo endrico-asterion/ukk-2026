@@ -47,9 +47,13 @@
         </div>
 
         <div class="form-group mb-3">
-        <label for="foto">Foto Bukti (opsional):</label>
-        <input type="file" name="foto" id="foto" class="form-control" accept="image/png, image/jpeg, image/webp">
-        <small class="text-muted">Format JPG, PNG, atau WEBP. Maksimal 2 MB.</small>
+            <label for="foto">Foto Bukti (opsional):</label>
+            <div class="input-group">
+            <input type="file" name="foto" id="foto" class="form-control" accept="image/png, image/jpeg, image/webp">
+            <button type="button" id="batalFoto" class="btn btn-outline-secondary" style="display:none">Batal</button>
+        </div>
+            <small class="text-muted">Format JPG, PNG, atau WEBP. Maksimal 2 MB.</small>
+            <img id="previewFoto" alt="Pratinjau foto" style="display:none; max-height:150px; margin-top:8px;" class="rounded">
         </div>
 
         <button type="submit" class="btn btn-primary">Kirim Aspirasi</button>
@@ -83,6 +87,33 @@
 
     kategori.addEventListener('change', isiAlat);
     isiAlat();
+</script>
+
+<script>
+(function () {
+    const foto = document.getElementById('foto');
+    const batal = document.getElementById('batalFoto');
+    const preview = document.getElementById('previewFoto');
+
+    function reset() {
+        foto.value = '';
+        preview.removeAttribute('src');
+        preview.style.display = 'none';
+        batal.style.display = 'none';
+    }
+
+    foto.addEventListener('change', function () {
+        if (foto.files && foto.files[0]) {
+            preview.src = URL.createObjectURL(foto.files[0]);
+            preview.style.display = 'block';
+            batal.style.display = 'inline-block';
+        } else {
+            reset();
+        }
+    });
+
+    batal.addEventListener('click', reset);
+})();
 </script>
 
 

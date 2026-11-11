@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `alat` (
     id_alat         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     kode_alat       VARCHAR(50) NOT NULL,
     nama_alat       VARCHAR(225) NOT NULL,
+    stok            INT UNSIGNED NOT NULL DEFAULT 0,
     id_kategori     INT UNSIGNED NOT NULL,
     created_at DATETIME NULL,
     updated_at DATETIME NULL,

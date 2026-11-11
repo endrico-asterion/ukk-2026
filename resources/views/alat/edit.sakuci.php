@@ -18,6 +18,9 @@
             @endforeach
         </select>
 
+        <label>Stok</label>
+            <input type="number" name="stok" class="form-control" min="0" value="{{ $alat->stok }}" required>
+
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

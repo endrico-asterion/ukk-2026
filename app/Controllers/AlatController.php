@@ -19,6 +19,7 @@ class AlatController extends Controller
     {
         $kategori = Kategori::all();
         return $this->view('alat.create', compact('kategori'));
+        
     }
 
     public function store(Request $request)
@@ -28,6 +29,8 @@ class AlatController extends Controller
             'id_kategori' => 'required',
         ]);
 
+        $stok = max(0, (int) $request->input('stok', 0));
+
         $terakhir = Alat::orderBy('id_alat', 'desc')->first();
         $nomorUrut = $terakhir ? ((int) substr($terakhir->kode_alat, 3)) + 1 : 1;
         $kodeOtomatis = 'ALT' . sprintf("%03d", $nomorUrut);
@@ -36,6 +39,7 @@ class AlatController extends Controller
             'kode_alat'   => $kodeOtomatis,
             'nama_alat'   => $request->input('nama_alat'),
             'id_kategori' => $request->input('id_kategori'),
+            'stok'        => $stok,
         ]);
 
         return redirect()->route('alat.index')->with('success', 'Alat berhasil ditambahkan.');
@@ -55,10 +59,13 @@ class AlatController extends Controller
             'id_kategori' => 'required',
         ]);
 
+        $stok = max(0, (int) $request->input('stok', 0));
+
         $alat = Alat::findOrFail($id_alat);
         $alat->update([
             'nama_alat'   => $request->input('nama_alat'),
             'id_kategori' => $request->input('id_kategori'),
+            'stok'        => $stok,
         ]);
 
         return redirect()->route('alat.index')->with('success', 'Alat berhasil diperbarui.');

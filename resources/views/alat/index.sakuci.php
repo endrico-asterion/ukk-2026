@@ -12,6 +12,7 @@
                 <th>Kode Alat</th>
                 <th>Nama Alat</th>
                 <th>Kategori</th>
+                <th>stok</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ $item->kode_alat }}</td>
                 <td>{{ $item->nama_alat }}</td>
                 <td>{{ $item->kategori->nama_kategori ?? '-' }}</td>
+                <td>{{ $item->stok }}</td>
                 <td>
                     <a href="{{ route('alat.edit', ['alat' => $item->id_alat]) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('alat.destroy', ['alat' => $item->id_alat]) }}" method="POST" style="display:inline">
@@ -34,7 +36,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="5">Belum ada data alat.</td>
+                <td colspan="6">Belum ada data alat.</td>
             </tr>
             @endforelse
         </tbody>
